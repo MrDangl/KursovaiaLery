@@ -26,14 +26,14 @@ public class WarehouseWork extends JFrame {
 
         search = new JButton("Поиск");
 
-        request = new JButton("Запрос");
+
 
         showAll = new JButton("Показать всех");
 
         buttons.add(add);
         buttons.add(edit);
         buttons.add(search);
-        buttons.add(request);
+
         buttons.add(showAll);
 
         String[] data = { "id", "Номер склада ", "Название склада", "Профиль склада", "Адрес склада"};
@@ -61,7 +61,7 @@ public class WarehouseWork extends JFrame {
         this.getContentPane().add(scrollTable);
         this.getContentPane().add(closePanel);
 
-        wareModel.addTableModelListener(a -> {
+        /*wareModel.addTableModelListener(a -> {
             if (selectedList == null || selectedList.isEmpty()) {
                 edit.setEnabled(false);
                 request.setEnabled(false);
@@ -69,9 +69,9 @@ public class WarehouseWork extends JFrame {
                 edit.setEnabled(true);
                 request.setEnabled(true);
             }
-        });
+        });*/
 
-        this.setTitle("Работа с аптеками");
+        this.setTitle("Работа со складами");
         this.setMinimumSize(new Dimension(600, 500));
         this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -80,7 +80,7 @@ public class WarehouseWork extends JFrame {
         add.addActionListener(a);
         edit.addActionListener(a);
         search.addActionListener(a);
-        request.addActionListener(a);
+
         showAll.addActionListener(a);
         close.addActionListener(a);
 
@@ -89,9 +89,7 @@ public class WarehouseWork extends JFrame {
             ArrayList<Warehouse> comList = new ArrayList<>();
             close.setText("OK");
             buttons.setVisible(false);
-//            if (c.getWarehouse() != null) {
-//                for (Integer i : c.getWarehouse())
-//                  ComList.add(Storage.getWarehouseById(i));
+
 //            }
             this.updateTable(comList);
         } else {}
@@ -122,7 +120,7 @@ public class WarehouseWork extends JFrame {
             } else if (e.getSource() == edit) {
                // AddWarehouse a = new AddPharmacy(this.owner, Storage.getWareById(Integer.parseInt((String) WareModel.getValueAt(WareTable.getSelectedRow(), 0))));
             } else if (e.getSource() == search) {
-                String request = JOptionPane.showInputDialog(this.owner, "Введите номер аптеки", "Поиск",
+                String request = JOptionPane.showInputDialog(this.owner, "Введите номер склада", "Поиск",
                         JOptionPane.QUESTION_MESSAGE);
 
                 if (request != null && !request.isEmpty()) {
@@ -136,15 +134,7 @@ public class WarehouseWork extends JFrame {
                         updateTable(tmpList);
                 }
             } else if (e.getSource() == request) {
-//                Integer requestId = selectedList.get(wareTable.getSelectedRow()).getId();
-//                ArrayList<Warehouse> tmpList = new ArrayList<>();
-//                for (Hospitals c : Storage.getStorHosp())
-//                    if (c.getPharmacy() != null)
-//                        for (Integer i : c.getPharmacy())
-//                            if (i.equals(requestId)) {
-//                                tmpList.add(c);
-//                                break;
-//                            }
+//
 //                owner.owner.updateTable(tmpList);
             } else if (e.getSource() == showAll) {
                 updateTable(Storage.getStorWarehouse());

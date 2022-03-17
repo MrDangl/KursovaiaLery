@@ -12,7 +12,7 @@ import java.util.Vector;
 public class MainFrame extends JFrame {
 
     protected JTable table1;
-    protected DefaultTableModel tableHosp;
+    protected DefaultTableModel tableCom;
     private JMenuItem itemAddCom, itemDelCom, itemEditCom, itemSearhCom, itemShowAll, itemShowWarehouse;
     private ArrayList<Com> selectedList;
 
@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
 
         JMenuBar menubar = new JMenuBar();
 
-        JMenu menuStudent = new JMenu("БД аптек");
+        JMenu menuStudent = new JMenu("БД cкладов");
         itemShowWarehouse = new JMenuItem("Показать базу складов");
 
         JMenu menuCom = new JMenu("Строительные компании");
@@ -53,8 +53,8 @@ public class MainFrame extends JFrame {
 
         JLabel nameTable = new JLabel("Список компаний в системе (для просмотра привязанных поставщиков необходимо дважды нажать на компанию");
 
-        tableHosp = new DefaultTableModel(new String[]{"ID", "Название компании", "Эл. почта  ", "Профиль услуг", "ФИО директора", "Адрес компании"}, 10);
-        table1 = new JTable(tableHosp) {
+        tableCom = new DefaultTableModel(new String[]{"ID", "Название компании", "Эл. почта  ", "Профиль услуг", "ФИО директора", "Адрес компании"}, 10);
+        table1 = new JTable(tableCom) {
 
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -107,18 +107,18 @@ public class MainFrame extends JFrame {
     }
 
     protected void updateTable(ArrayList<Com> selectedList) {
-        tableHosp.setRowCount(0);
+        tableCom.setRowCount(0);
         this.selectedList = selectedList;
 
         for (Com h : selectedList) {
 
             String[] data = {Integer.toString(h.getId()), h.getNumberWarehouse(), h.getEmail(),h.getWareProfile(), h.getFioWare(), h.getWareAdress()
             };
-            tableHosp.addRow(data);
+            tableCom.addRow(data);
             table1.setRowSelectionInterval(0, 0);
         }
-        if (tableHosp.getRowCount() == 0) {
-            tableHosp.addRow((Vector<String>) null);
+        if (tableCom.getRowCount() == 0) {
+            tableCom.addRow((Vector<String>) null);
         }
     }
 
@@ -148,11 +148,6 @@ public class MainFrame extends JFrame {
                         JOptionPane.QUESTION_MESSAGE);
                 ArrayList<Com> tmpList = new ArrayList<>();
                 if (request != null) {
-//                    for (Com c : Storage.getStorHosp()) {
-//                        if (c.geNumberHosp().toLowerCase().equals(request.toLowerCase())) {
-//                            tmpList.add(c);
-//                        }
-//                    }
                     if (tmpList.isEmpty()) {
                         JOptionPane.showMessageDialog(this.owner, "По вашему запросу ничего не найдено");
                     } else {

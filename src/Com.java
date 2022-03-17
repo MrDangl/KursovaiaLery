@@ -19,7 +19,7 @@ public class Com {
         this.email = email;
     }
 
-    public void setNumberWarehouse(String numberPharmacy) {
+    public void setNumberWarehouse(String numberWarehouse) {
         this.numberWarehouse = numberWarehouse;
     }
 
@@ -31,8 +31,8 @@ public class Com {
         this.id = id;
     }
 
-    public void setPharmacy(Integer[] pharmacy) {
-        this.warehouse = pharmacy;
+    public void setwarehouse (Integer[] warehouse) {
+        this.warehouse = warehouse;
     }
 
     public void setWareProfile(String wareProfile) {
@@ -43,7 +43,7 @@ public class Com {
         return id;
     }
 
-    public Integer[] getPharmacy() {
+    public Integer[] getwarehouse() {
         return warehouse;
     }
 

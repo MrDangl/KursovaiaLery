@@ -7,27 +7,27 @@ import java.awt.event.WindowEvent;
 
 public class AddWarehouse extends JFrame {
 
-    private JTextField namePharm = new JTextField(), number = new JTextField(), profile = new JTextField(), address = new JTextField();
+    private JTextField nameWare = new JTextField(), number = new JTextField(), profile = new JTextField(), address = new JTextField();
     private JButton ok, cancel;
     private WarehouseWork owner;
-    private Warehouse editedPharm = null;
+    private Warehouse editedWare = null;
 
     public AddWarehouse(WarehouseWork owner, Warehouse s) {
         this.getContentPane().setLayout(new GridLayout(5, 2, 5, 5));
 
-        JLabel nameLabel = new JLabel("Название аптеки");
-        JLabel numberLabel = new JLabel("Номер аптеки");
-        JLabel profileLabel = new JLabel("Мед. профиль");
+        JLabel nameLabel = new JLabel("Название склада");
+        JLabel numberLabel = new JLabel("Номер склада");
+        JLabel profileLabel = new JLabel("Профиль");
         JLabel addressLabel = new JLabel("Адрес");
 
         ok = new JButton("ОК");
         cancel = new JButton("Отмена");
 
         this.owner = owner;
-        this.editedPharm = s;
+        this.editedWare = s;
 
         this.getContentPane().add(nameLabel);
-        this.getContentPane().add(namePharm);
+        this.getContentPane().add(nameWare);
         this.getContentPane().add(numberLabel);
         this.getContentPane().add(number);
         this.getContentPane().add(profileLabel);
@@ -52,11 +52,7 @@ public class AddWarehouse extends JFrame {
         cancel.addActionListener(a);
 
         if (s != null) {
-//            nameWare.setText(s.getNamePharmacy());
-//            number.setText(s.getNumber());
-//            profile.setText(s.getProfile());
-//            address.setText(s.getAddress());
-//            this.setTitle("Изменение");
+
         }
 
         //слушатель закрытия окна
@@ -79,19 +75,15 @@ public class AddWarehouse extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == ok) {
-                if (namePharm.getText().trim().isEmpty() && profile.getText().trim().isEmpty())
+                if (nameWare.getText().trim().isEmpty() && profile.getText().trim().isEmpty())
                     JOptionPane.showMessageDialog(this.owner, "Есть незаполненные поля!");
                 else {
-                    if (editedPharm != null) {
+                    if (editedWare != null) {
                         System.out.println("Check");
-//                        editedWare.setNamePharmacy(namePharm.getText().trim());
-//                        editedWare.setNumber(number.getText().trim());
-//                        editedWare.setProfile(profile.getText().trim());
-//                        editedWare.setAddress(address.getText().trim());
-//                        Storage.updateStudent(editedPharm);
+
                     } else
 
-                       // Storage.add(new Pharmacy(nameWare.getText().trim(), number.getText().trim(), profile.getText().trim(),address.getText().trim()));
+
                     this.owner.owner.updateTable(Storage.getStorWarehouse());
                     this.owner.owner.setEnabled(true);
                     this.owner.dispose();

@@ -19,21 +19,21 @@ public class AddCom extends JFrame {
     private JButton add;
     private JButton cancel;
     private JFrame kycm;
-    private JLabel VvodNumberCom = new JLabel("Введите номер больницы");
+    private JLabel VvodNumberCom = new JLabel("Введите номер");
     private JLabel VvodEmail = new JLabel("Введите адрес эл.почты");
-    private JLabel VvodComProfile = new JLabel("Введите область оказания мед.услуг");
-    private JLabel VvodFIO = new JLabel("Введите ФИО главного врача");
-    private JLabel VvodAddress = new JLabel("Введите адрес больницы");
+    private JLabel VvodComProfile = new JLabel("Введите профиль оказываемых услуг");
+    private JLabel VvodFIO = new JLabel("Введите ФИО директора");
+    private JLabel VvodAddress = new JLabel("Введите адрес");
     private MaskFormatter mf1 = null;
     private JFormattedTextField tfDate = new JFormattedTextField(mf1);
 
     private JTextField numberCom = new JTextField();
     private JTextField email = new JTextField();
-    private JTextField hospProfile = new JTextField();
+    private JTextField comProfile = new JTextField();
     private JTextField FIO = new JTextField();
     private JTextField address = new JTextField();
     private MainFrame owner;
-    private Com editedHosp = null;
+    private Com editedCom = null;
     private ArrayList<Warehouse> selectedList = new ArrayList<>();
     private ArrayList<Warehouse> comList = new ArrayList<>();
     public AddCom(MainFrame frame, Com c) {
@@ -62,17 +62,17 @@ public class AddCom extends JFrame {
         fieldPane.add(VvodEmail);
         fieldPane.add(email);
         fieldPane.add(VvodComProfile);
-        fieldPane.add(hospProfile);
+        fieldPane.add(comProfile);
         fieldPane.add(VvodFIO);
         fieldPane.add(FIO);
         fieldPane.add(VvodAddress);
         fieldPane.add(address);
 
         JPanel tableName = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel name = new JLabel("Таблица аптек");
+        JLabel name = new JLabel("Таблица склады");
         tableName.add(name);
 
-        String[] columnNames = {"", "id", "Номер аптеки", "Название аптеки", "Мед.профиль", "Адрес"};
+        String[] columnNames = {"", "id", "Номер складла", "Название склада", "Профиль", "Адрес"};
         tm = new DefaultTableModel(columnNames, 100);
         wareTable = new JTable(tm) {
 
@@ -119,18 +119,8 @@ public class AddCom extends JFrame {
         });
 
         if (c != null) {
-            editedHosp = c;
-//            if (c.getPharmacy() != null) {
-//                for (Integer i : c.getPharmacy()) {
-//                    hospsList.add(Storage.getPharmById(i));
-//                }
-//            }
-//            numberHosp.setText(editedHosp.geNumberHosp());
-//            email.setText(editedHosp.getHospAddress());
-//
-//            hospProfile.setText(editedHosp.getHospProfile());
-//            FIO.setText(editedHosp.getFioHosp());
-//            address.setText(editedHosp.getHospAddress());
+            editedCom = c;
+
             add.setText("Изменить");
             super.setTitle("Изменение");
         }
@@ -150,15 +140,15 @@ public class AddCom extends JFrame {
 
             if (e.getSource() == add) {
 
-                if ((numberCom.getText().trim().isEmpty()) || (email.getText().trim().isEmpty()) || (hospProfile.getText().trim().isEmpty())
+                if ((numberCom.getText().trim().isEmpty()) || (email.getText().trim().isEmpty()) || (comProfile.getText().trim().isEmpty())
                         || (FIO.getText().trim().isEmpty()) || (address.getText().trim().isEmpty())) {
                     JOptionPane.showMessageDialog(this.owner, "Есть незаполненные поля!");
                 } else {
                     String number = numberCom.getText();
                     // LocalDate date = LocalDate.parse(tfDate.getText(), MainFrame.formatter);
                     String postEmail = email.getText();
-                    String oblastUslug = hospProfile.getText();
-                    String nameVracha = FIO.getText();
+                    String oblastUslug = comProfile.getText();
+                    String name = FIO.getText();
                     String adres = address.getText();
                     ArrayList<String> temp = new ArrayList<>();
                     for (int i = 0; i < tm.getRowCount(); i++) {
@@ -171,19 +161,12 @@ public class AddCom extends JFrame {
                         tempArr[i] = Integer.parseInt(temp.get(i));
                     }
 
-                    if (editedHosp == null) {
+                    if (editedCom == null) {
                         JOptionPane.showMessageDialog(this.owner, "Добавлено");
-                        //Storage.add(new Hospitals(number, postEmail, oblastUslug, nameVracha, adres, tempArr));
+
                     } else {
                         JOptionPane.showMessageDialog(this.owner, "Изменено");
-//                        editedHosp.setNumberHosp(number);
-//
-//                        editedHosp.setEmail(postEmail);
-//                        editedHosp.setHospProfile(oblastUslug);
-//                        editedHosp.setFioHosp(nameVracha);
-//                        editedHosp.setHospAddress(adres);
-//                        editedHosp.setPharmacy(tempArr);
-//                        Storage.updateHosp(editedHosp);
+
                     }
 
                     this.owner.owner.setEnabled(true);
